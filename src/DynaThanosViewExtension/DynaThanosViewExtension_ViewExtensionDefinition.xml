@@ -1,4 +1,4 @@
 ﻿<ViewExtensionDefinition>
-  <AssemblyPath>..\bin\MonocleViewExtension.dll</AssemblyPath>
+  <AssemblyPath>..\bin\DynaThanosViewExtension.dll</AssemblyPath>
   <TypeName>DynaThanosViewExtension.DynaThanosViewExtension</TypeName>
 </ViewExtensionDefinition>
