@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Dynamo.Controls;
 using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
@@ -42,6 +43,7 @@ namespace DynaThanosViewExtension
             view = p.DynamoWindow as DynamoView;
 
             sampleMenuItem = new MenuItem {Header = "DynaThanos"};
+            sampleMenuItem.Foreground = Brushes.BlueViolet;
             sampleMenuItem.Click += (sender, args) =>
             {
                 var viewModel = new DynaThanosViewModel(p);
