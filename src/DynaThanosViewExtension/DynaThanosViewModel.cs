@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -24,6 +25,7 @@ namespace DynaThanosViewExtension
         private static ViewLoadedParams loadedParams;
         private static NodeModel _currentNode;
         private static DynamoViewModel _vm;
+        private static Random rng = new Random();
 
         public DynaThanosViewModel(ViewLoadedParams p)
         {
@@ -35,14 +37,25 @@ namespace DynaThanosViewExtension
 
         public static void RespondToSnap()
         {
+            //get the nodes and shuffle them randomly
             var nodes = _vm.CurrentSpace.Nodes.ToList();
+            Shuffle(nodes);
+            //find fifty percent that need to be removed
+            //"When I’m done, half of your nodes will still exist. Perfectly balanced, as all things should be. I hope they remember you."
+            var fiftyPercent = nodes.GetRange(0, nodes.Count / 2);
+
+            //zoom to the candidates to watch them fade away
+            _vm.AddToSelectionCommand.Execute(fiftyPercent);
+            _vm.FitViewCommand.Execute(null);
 
             int flag = 0;
+            //obtain the node view to fade
             var nodeViews = loadedParams.DynamoWindow.FindVisualChildren<NodeView>();
 
-            while (flag < nodes.Count())
+            //loop through the nodes while delaying the time each loop
+            while (flag < fiftyPercent.Count())
             {
-                _currentNode = nodes[flag];
+                _currentNode = fiftyPercent[flag];
                 var nodeView = nodeViews.First(n => n.ViewModel.Name.Equals(_currentNode.Name));
 
                 DoubleAnimation animation = new DoubleAnimation(0, TimeSpan.FromSeconds(flag+1));
@@ -53,10 +66,18 @@ namespace DynaThanosViewExtension
 
 
         }
-
-        private static void TimerOnTick(object sender, EventArgs e)
+        public static void Shuffle<T>(IList<T> list)
         {
-            throw new NotImplementedException();
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
         }
+
     }
 }
