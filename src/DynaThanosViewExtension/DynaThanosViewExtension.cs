@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Dynamo.Controls;
 using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
@@ -44,6 +45,13 @@ namespace DynaThanosViewExtension
 
             sampleMenuItem = new MenuItem {Header = "DynaThanos"};
             sampleMenuItem.Foreground = Brushes.BlueViolet;
+
+
+            sampleMenuItem.Icon = new System.Windows.Controls.Image
+            {
+                Source = new BitmapImage(new Uri("pack://application:,,,/DynaThanosViewExtension;component/Resources/thanosEmoji.png"))
+            };
+
             sampleMenuItem.Click += (sender, args) =>
             {
                 var viewModel = new DynaThanosViewModel(p);

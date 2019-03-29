@@ -150,6 +150,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="Resources\thanosEmoji.png" />
     <Resource Include="Resources\Snap2.gif" />
     <Resource Include="Resources\Loading.gif" />
     <Resource Include="Resources\Snap.gif" />
