@@ -26,39 +26,40 @@ namespace DynaThanosViewExtension
         private static NodeModel _currentNode;
         private static DynamoViewModel _vm;
         private static Random rng = new Random();
-
+        private static List<NodeModel> _fiftyPercent;
         public DynaThanosViewModel(ViewLoadedParams p)
         {
             loadedParams = p;
             _vm = loadedParams.DynamoWindow.DataContext as DynamoViewModel;
         }
 
-       
-
-        public static void RespondToSnap()
+        public static void ZoomToFit()
         {
             //get the nodes and shuffle them randomly
             var nodes = _vm.CurrentSpace.Nodes.ToList();
             Shuffle(nodes);
             //find fifty percent that need to be removed
             //"When I’m done, half of your nodes will still exist. Perfectly balanced, as all things should be. I hope they remember you."
-            var fiftyPercent = nodes.GetRange(0, nodes.Count / 2);
+            _fiftyPercent = nodes.GetRange(0, nodes.Count / 2);
 
             //zoom to the candidates to watch them fade away
-            _vm.AddToSelectionCommand.Execute(fiftyPercent);
+            _vm.AddToSelectionCommand.Execute(_fiftyPercent);
             _vm.FitViewCommand.Execute(null);
+        }
+
+
+        public static void RespondToSnap()
+        {
 
             int flag = 0;
             //obtain the node view to fade
             var nodeViews = loadedParams.DynamoWindow.FindVisualChildren<NodeView>();
-
             //loop through the nodes while delaying the time each loop
-            while (flag < fiftyPercent.Count())
+            while (flag < _fiftyPercent.Count())
             {
-                _currentNode = fiftyPercent[flag];
+                _currentNode = _fiftyPercent[flag];
                 var nodeView = nodeViews.First(n => n.ViewModel.Name.Equals(_currentNode.Name));
-
-                DoubleAnimation animation = new DoubleAnimation(0, TimeSpan.FromSeconds(flag+1));
+                DoubleAnimation animation = new DoubleAnimation(0, TimeSpan.FromSeconds(flag));
                 nodeView.BeginAnimation(Control.OpacityProperty, animation);
                 flag++;
             }

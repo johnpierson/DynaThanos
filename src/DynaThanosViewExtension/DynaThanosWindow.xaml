@@ -4,12 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DynaThanosViewExtension"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
-            Width="500" Height="100">
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
+             mc:Ignorable="d"
+            Width="278.5" Height="297.716">
     <Grid Name="MainGrid" 
           HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch">
-        <Button Content="Button" HorizontalAlignment="Left" Margin="213,22,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Image x:Name="Loading" gif:ImageBehavior.AnimatedSource="Resources/Loading.gif" gif:ImageBehavior.RepeatBehavior="1x" Margin="0,40,20,0" HorizontalAlignment="Right" Width="242" Height="120" VerticalAlignment="Top"/>
+        <Image x:Name="Snap" gif:ImageBehavior.AnimatedSource="Resources/Snap2.gif" gif:ImageBehavior.RepeatBehavior="1x" Margin="10,48,0,0" Height="101" VerticalAlignment="Top" HorizontalAlignment="Left" Width="240"/>
+        <Button x:Name="SnapButton" Content="Snap" HorizontalAlignment="Left" Margin="179,220,0,0" VerticalAlignment="Top" Width="60" Click="Button_Click"/>
+        <Label Content="DynaThanos View Extension" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Width="250" Background="White" Foreground="#FF7A8DE0" FontWeight="Bold" FontSize="18"/>
+        <TextBox HorizontalAlignment="Left" Height="50" Margin="10,165,0,0" TextWrapping="Wrap" Text="This tool allows you to clean up your Dynamo graph by getting rid of 50% of the nodes." Foreground="#FF7A8DE0" VerticalAlignment="Top" Width="240" FontStyle="Italic"/>
     </Grid>
 </Window>

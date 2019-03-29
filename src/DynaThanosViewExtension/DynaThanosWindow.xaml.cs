@@ -1,6 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Threading;
 using Dynamo.Graph.Nodes;
 using Dynamo.ViewModels;
+using WpfAnimatedGif;
 
 namespace DynaThanosViewExtension
 {
@@ -12,14 +15,31 @@ namespace DynaThanosViewExtension
         public DynaThanosWindow()
         {
             InitializeComponent();
+            this.Snap.Visibility = Visibility.Hidden;
+            DynaThanosViewModel.ZoomToFit();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            this.Loading.Visibility = Visibility.Hidden;
+            this.Snap.Visibility = Visibility.Visible;
 
-                DynaThanosViewModel.RespondToSnap();
             
-           
+
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(2);
+            timer.Tick += TimerOnTick;
+            timer.Start();
+
+        }
+
+        private void TimerOnTick(object sender, EventArgs e)
+        {
+            DynaThanosViewModel.RespondToSnap();
+            DispatcherTimer timer = (DispatcherTimer)sender;
+            timer.Stop();
+            timer.Tick -= TimerOnTick;
+            Close();
         }
     }
 }
