@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
@@ -44,7 +45,7 @@ namespace DynaThanosViewExtension
                 _currentNode = nodes[flag];
                 var nodeView = nodeViews.First(n => n.ViewModel.Name.Equals(_currentNode.Name));
 
-                DoubleAnimation animation = new DoubleAnimation(0, TimeSpan.FromSeconds(3));
+                DoubleAnimation animation = new DoubleAnimation(0, TimeSpan.FromSeconds(flag+1));
                 nodeView.BeginAnimation(Control.OpacityProperty, animation);
                 flag++;
             }
@@ -53,6 +54,9 @@ namespace DynaThanosViewExtension
 
         }
 
-       
+        private static void TimerOnTick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
