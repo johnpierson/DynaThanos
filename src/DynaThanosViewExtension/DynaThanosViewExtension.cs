@@ -25,7 +25,7 @@ namespace DynaThanosViewExtension
     /// </summary>
     public class DynaThanosViewExtension : IViewExtension
     {
-        private MenuItem sampleMenuItem;
+        private MenuItem dynaThanosMenuItem;
 
         public void Dispose()
         {
@@ -43,16 +43,16 @@ namespace DynaThanosViewExtension
 
             view = p.DynamoWindow as DynamoView;
 
-            sampleMenuItem = new MenuItem {Header = "DynaThanos"};
-            sampleMenuItem.Foreground = Brushes.BlueViolet;
+            dynaThanosMenuItem = new MenuItem {Header = "DynaThanos"};
+            dynaThanosMenuItem.Foreground = Brushes.BlueViolet;
 
 
-            sampleMenuItem.Icon = new System.Windows.Controls.Image
+            dynaThanosMenuItem.Icon = new System.Windows.Controls.Image
             {
                 Source = new BitmapImage(new Uri("pack://application:,,,/DynaThanosViewExtension;component/Resources/thanosEmoji.png"))
             };
 
-            sampleMenuItem.Click += (sender, args) =>
+            dynaThanosMenuItem.Click += (sender, args) =>
             {
                 var viewModel = new DynaThanosViewModel(p);
                 var window = new DynaThanosWindow
@@ -70,7 +70,8 @@ namespace DynaThanosViewExtension
                 // Show a modeless window.
                 window.Show();
             };
-            p.AddMenuItem(MenuBarType.View, sampleMenuItem);
+            p.AddMenuItem(MenuBarType.Help, dynaThanosMenuItem,0);
+            //p.dynamoMenu.Items.Add(dynaThanosMenuItem);
         }
 
         public void Shutdown()

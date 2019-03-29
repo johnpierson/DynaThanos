@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Dynamo.Controls;
 using Dynamo.Core;
 using Dynamo.Extensions;
@@ -26,7 +27,9 @@ namespace DynaThanosViewExtension
         private static NodeModel _currentNode;
         private static DynamoViewModel _vm;
         private static Random rng = new Random();
+        private static List<NodeView> _nodeViews;
         private static List<NodeModel> _fiftyPercent;
+        private static InfoBubbleViewModel _infoBubble;
         public DynaThanosViewModel(ViewLoadedParams p)
         {
             loadedParams = p;
@@ -52,21 +55,50 @@ namespace DynaThanosViewExtension
         {
 
             int flag = 0;
+            double fadeTime = 0.75;
             //obtain the node view to fade
-            var nodeViews = loadedParams.DynamoWindow.FindVisualChildren<NodeView>();
+            _nodeViews = loadedParams.DynamoWindow.FindVisualChildren<NodeView>().ToList();
             //loop through the nodes while delaying the time each loop
             while (flag < _fiftyPercent.Count())
             {
                 _currentNode = _fiftyPercent[flag];
-                var nodeView = nodeViews.First(n => n.ViewModel.Name.Equals(_currentNode.Name));
-                DoubleAnimation animation = new DoubleAnimation(0, TimeSpan.FromSeconds(flag));
+                var nodeView = _nodeViews.First(n => n.ViewModel.Id.ToString().Equals(_currentNode.GUID.ToString()));
+                if (flag == _fiftyPercent.Count()-1)
+                {
+                    //future info bubble display
+                    _infoBubble = nodeView.ViewModel.ErrorBubble;
+                    nodeView.ViewModel.ErrorBubble.InfoBubbleState = InfoBubbleViewModel.State.Pinned;
+                    nodeView.ViewModel.ErrorBubble.InfoBubbleStyle = InfoBubbleViewModel.Style.Warning;
+                    nodeView.ViewModel.ErrorBubble.Content = "i don't feel so good....";
+                    nodeView.ViewModel.ErrorBubble.FullContent = nodeView.Uid;
+                }
+
+
+                DoubleAnimation animation = new DoubleAnimation(0, TimeSpan.FromSeconds(fadeTime)); 
                 nodeView.BeginAnimation(Control.OpacityProperty, animation);
                 flag++;
+                fadeTime = fadeTime + 0.75;
             }
+    
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(fadeTime);
+            timer.Tick += TimerOnTick;
+            timer.Start();
+        }
 
+        private static void TimerOnTick(object sender, EventArgs e)
+        {
+            var guids = _fiftyPercent.Select(n => n.GUID);
 
+            _vm.Model.ExecuteCommand(new DynamoModel.DeleteModelCommand(guids));
+            
+
+            DispatcherTimer timer = (DispatcherTimer)sender;
+            timer.Stop();
+            timer.Tick -= TimerOnTick;
 
         }
+
         public static void Shuffle<T>(IList<T> list)
         {
             int n = list.Count;

@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:DynaThanosViewExtension"
              xmlns:gif="http://wpfanimatedgif.codeplex.com"
              mc:Ignorable="d"
-            Width="278.5" Height="297.716">
+            Width="327.833" Height="351.05">
     <Grid Name="MainGrid" 
           HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch">
-        <Image x:Name="Loading" gif:ImageBehavior.AnimatedSource="Resources/Loading.gif" gif:ImageBehavior.RepeatBehavior="1x" Margin="8,40,0,107" HorizontalAlignment="Left" Width="252"/>
-        <Image x:Name="Snap" gif:ImageBehavior.AnimatedSource="Resources/Snap2.gif" gif:ImageBehavior.RepeatBehavior="1x" Margin="11,45,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="249" Height="107" VerticalAlignment="Top">
+        <Image x:Name="Loading" gif:ImageBehavior.AnimatedSource="Resources/Loading.gif" gif:ImageBehavior.RepeatBehavior="1x" Margin="13,40,0,0" HorizontalAlignment="Left" Width="301" Height="132" VerticalAlignment="Top"/>
+        <Image x:Name="Snap" gif:ImageBehavior.AnimatedSource="Resources/Snap2.gif" gif:ImageBehavior.RepeatBehavior="1x" Margin="13,45,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="290" Height="121" VerticalAlignment="Top">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -21,9 +21,10 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Button x:Name="SnapButton" Content="Snap" HorizontalAlignment="Left" Margin="200,227,0,0" VerticalAlignment="Top" Width="60" Click="Button_Click" Background="#FFE4E411"/>
-        <Label HorizontalContentAlignment="Center" Content="DynaThanos View Extension" HorizontalAlignment="Left" Width="252" Background="White" Foreground="#FF7A8DE0" FontWeight="Bold" FontSize="18" Margin="8,5,0,0" Height="35" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="45" Margin="10,165,0,0" TextWrapping="Wrap" Text="This tool allows you to clean up your Dynamo graph by getting rid of 50% of the nodes." Foreground="#FF7A8DE0" VerticalAlignment="Top" Width="250" FontStyle="Italic"/>
-        <Image HorizontalAlignment="Left" Height="52" Margin="143,215,0,0" VerticalAlignment="Top" Width="52" Source="Resources/thanosEmoji.png"/>
+        <Button x:Name="SnapButton" Content="Snap" HorizontalAlignment="Left" Margin="241,260,0,0" VerticalAlignment="Top" Width="60" Click="Button_Click" Background="#FFE4E411" Height="29"/>
+        <Label HorizontalContentAlignment="Center" Content="DynaThanos: View Extension" HorizontalAlignment="Left" Width="252" Background="White" Foreground="#FF7A8DE0" FontWeight="Bold" FontSize="18" Margin="8,5,0,0" Height="35" VerticalAlignment="Top"/>
+        <TextBox BorderThickness="0"  HorizontalAlignment="Left" Height="45" Margin="10,170,0,0" TextWrapping="Wrap" Text="This tool allows you to clean up your Dynamo graph by getting rid of 50% of the nodes." Foreground="#FF7A8DE0" VerticalAlignment="Top" Width="304" FontStyle="Italic" FontSize="14"/>
+        <Image HorizontalAlignment="Left" Height="64" Margin="165,246,0,0" VerticalAlignment="Top" Width="71" Source="Resources/thanosEmoji.png"/>
+        <TextBox BorderThickness="0"  HorizontalAlignment="Left" Height="45" Margin="10,215,0,0" TextWrapping="Wrap" Text="WARNING: This will literally delete 50% of the nodes from your graph. This tool was made for fun, and should be used with caution." Foreground="#FFA66E94" VerticalAlignment="Top" Width="304" FontStyle="Italic" FontSize="9" Background="{x:Null}"/>
     </Grid>
 </Window>
