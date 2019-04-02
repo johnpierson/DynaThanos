@@ -18,3 +18,6 @@ This view extension was made as an April Fool's Day Joke to have some fun. It is
 After compiling the code and setting up the extension. DynaThanos will appear in the help menu. With a simple button click, you are able to clean up your Dynamo graph by 50%!
 
 <img src="https://github.com/johnpierson/DynaThanos/blob/master/_resources/GIFs/DynaThanosUsage.gif" alt="DynaThanos" width="800">
+
+## License
+This project is licensed under the []BSD 3 Clause](https://github.com/johnpierson/DynaThanos/blob/master/LICENSE) License. Basically it includes the following: [via TLDRLegal](https://tldrlegal.com/license/bsd-3-clause-license-(revised)).
