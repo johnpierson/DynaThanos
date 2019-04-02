@@ -20,4 +20,4 @@ After compiling the code and setting up the extension. DynaThanos will appear in
 <img src="https://github.com/johnpierson/DynaThanos/blob/master/_resources/GIFs/DynaThanosUsage.gif" alt="DynaThanos" width="800">
 
 ## License
-This project is licensed under the []BSD 3 Clause](https://github.com/johnpierson/DynaThanos/blob/master/LICENSE) License. Basically it includes the following: [via TLDRLegal](https://tldrlegal.com/license/bsd-3-clause-license-(revised)).
+This project is licensed under the [BSD 3 Clause](https://github.com/johnpierson/DynaThanos/blob/master/LICENSE) License. By using this project you agree to the terms and conditions of the license. A simplified summary of this license is available at [TLDRLegal](https://tldrlegal.com/license/bsd-3-clause-license-(revised)).
